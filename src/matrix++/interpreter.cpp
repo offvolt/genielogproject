@@ -1,6 +1,7 @@
-#incldue <iostream>
+#include <iostream>
+#include "interpreter.h"
 
-using namespce std;
+using namespace std;
 
 Interpreter::Interpreter()
 {
