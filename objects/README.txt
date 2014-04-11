@@ -1,0 +1,1 @@
+Ce répertoire contient tous les .o !
