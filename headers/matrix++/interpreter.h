@@ -111,7 +111,7 @@ public:
      *  \return true si la demande de l'utilisateur est correctement traité
      *  false sinon
      */
-    bool activeProcess(/*MatrixManager & matrixManager*/);
+    bool activeProcess(MatrixManager &matrixManager);
 
     /*!
      *  \brief récupération d'un string contenant une commande tapé par l'utilisateur
