@@ -78,10 +78,11 @@ private:
      *         matrix1 : string contenant le nom d'une des matrices sur laquelle l'opération est effectué
      *         matrix2 : string contenant le nom d'une des matrices sur laquelle l'opération est effectué
      *         matrixOut : string contenant le nom de la matrice qui contiendra le resultat de l'opération
+     *         matrixManager : contient les fonctions de calculs
      *  \return true si il n'y a pas de problème avec l'appel des focntions et leur execution
      *  false sinon
      */
-    bool operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n);
+    bool operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager);
 
 public:
     /*!
