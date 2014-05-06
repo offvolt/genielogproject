@@ -31,8 +31,8 @@ private:
      *  Si la commande est `@ = A * B
      *  Il sera signalé à l'utilisateur que la commande qu'il a entré est erronée
      *
-     *  \param i : indice signalant la position actuel dans le string représntant la commande entré par l'utilisateur
-               c : string servant à récupérer les noms de matrice
+     *  \param i : indice signalant la position actuel dans le string représentant la commande entré par l'utilisateur
+     *          c : string servant à récupérer les noms de matrice
      *  \return true si il n'y a pas de problème avec les noms de matrices
      *  false sinon
      */
@@ -47,7 +47,7 @@ private:
      *  Il sera signalé à l'utilisateur que la commande qu'il a entré est erronée
      *  De même si l'on a A^-2 ou A^B , etc ...
      *
-     *  \param i : indice signalant la position actuel dans le string représntant la commande entré par l'utilisateur
+     *  \param i : indice signalant la position actuel dans le string représentant la commande entré par l'utilisateur
      *  \return true si il n'y a pas de problème avec les opérateurs
      *  false sinon
      */
@@ -61,7 +61,7 @@ private:
      *  Si la commande est A^2
      *  le caractère 2 sera récupéré et convertit en int afin de pouvoir faire les opérations
      *
-     *  \param i : indice signalant la position actuel dans le string représntant la commande entré par l'utilisateur
+     *  \param i : indice signalant la position actuel dans le string représentant la commande entré par l'utilisateur
      *         op : string contenant l'opération à réaliser
      *         n : int dans lequel sera récupérer les nombres éventuellement nécessaire aux opérations
      *  \return true si il n'y a pas de problème avec les caractères suivant le symbole ^
@@ -79,10 +79,22 @@ private:
      *         matrix2 : string contenant le nom d'une des matrices sur laquelle l'opération est effectué
      *         matrixOut : string contenant le nom de la matrice qui contiendra le resultat de l'opération
      *         matrixManager : contient les fonctions de calculs
-     *  \return true si il n'y a pas de problème avec l'appel des focntions et leur execution
+     *  \return true si il n'y a pas de problème avec l'appel des fonctions et leur execution
      *  false sinon
      */
     bool operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager);
+
+     /*!
+     *  \brief verifie un nom de fichier
+     *
+     *  Methode qui permet de verifier qu'un string est bien de la forme "nomDeficheir.mat"
+     *
+     *  \param i : indice signalant la position actuel dans le string représentant la commande entré par l'utilisateur
+     *         c : string servant à récupérer lenom du fichier
+     *  \return true si il n'y a pas de problème avec l'appel des fonctions et leur execution
+     *  false sinon
+     */
+    bool verifFileName(int &i, string &c);
 
 public:
     /*!
@@ -112,7 +124,7 @@ public:
      *  \return true si la demande de l'utilisateur est correctement traité
      *  false sinon
      */
-    bool activeProcess(MatrixManager &matrixManager);
+    bool activeProcess(MatrixManager & matrixManager);
 
     /*!
      *  \brief récupération d'un string contenant une commande tapé par l'utilisateur
