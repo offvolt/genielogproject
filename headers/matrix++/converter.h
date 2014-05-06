@@ -50,6 +50,6 @@ class Converter
     * \param FileName :Chaîne de caractere (string) qui est le fichier de lecture.
     *        FileName ne peuvent pas être nul sinon il ce passera rien
     *\return true si la fichier et correcte sinon il retourne false
-    
+    */
 };
 
