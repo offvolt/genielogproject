@@ -36,6 +36,8 @@ class Converter
     *        FileName2 :Chaîne de caractere (string) qui est le fichier de d'ecriture soit de destination.
     * Si le fichier de destination n'existe pas il le crée automatiquement au nom donnée.
     * FileName1 et FileName2 ne peuvent pas être nul.
-    */    
+    */   
+    
+    static bool verif(string &fileName); // Fonction de verification
 };
 
