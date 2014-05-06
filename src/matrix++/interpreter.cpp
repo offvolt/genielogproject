@@ -27,23 +27,28 @@ string Interpreter::getCommand()
 
 bool Interpreter::activeProcess(MatrixManager &matrixManager)
 {
+    if (command == "help") { help(); return true; }
     string c="", matrix1="", matrix2="", matrixOut="", op="";
     int i=0, compt=0, n=0;
     while (command[i] != '\0')
     {
         if (!matrixName(i, c)) { return false; }
         if (i == 0) { return false; }
-        if (command[i] != '\0') { if (!sign(i)) { return false; } }
-        if (command[i] == '=') { if (compt == 0) { matrixOut=c; compt++; } else { return false; } }
-        else if (command[i] != '\0')
+        if (command[i] == '<') { matrixOut=c; i++; c=""; if (!verifFileName(i, c)) { return false; } op="<"; matrix1=c; }
+        else
         {
-            op+=command[i];
-            if (op == "^") { if (!controlExp(i, op, n)) { return false; } }
-        }
-        if (command[i] != '=')
-        {
-            if ((compt == 0) || (compt == 1)) { matrix1=c; compt=2; }
-            else { matrix2=c; }
+            if (command[i] != '\0') { if (!sign(i)) { return false; } }
+            if (command[i] == '=') { if (compt == 0) { matrixOut=c; compt++; } else { return false; } }
+            else if (command[i] != '\0')
+            {
+                op+=command[i];
+                if (op == "^") { if (!controlExp(i, op, n)) { return false; } }
+            }
+            if (command[i] != '=')
+            {
+                if ((compt == 0) || (compt == 1)) { matrix1=c; compt=2; }
+                else { matrix2=c; }
+            }
         }
         if (command[i] != '\0') { i++; }
         c="";
@@ -55,7 +60,7 @@ bool Interpreter::matrixName(int &i, string &c)
 {
     char l;
     int verif=0;
-    while ((command[i] != '+') && (command[i] != '-') && (command[i] != '*') && (command[i] != '=') && (command[i] != '^') && (command[i] != '\0'))
+    while ((command[i] != '+') && (command[i] != '-') && (command[i] != '*') && (command[i] != '=') && (command[i] != '^') && (command[i] != '\0') && (command[i] != '<'))
     {
         verif=0;
         c+=command[i];
@@ -70,7 +75,7 @@ bool Interpreter::matrixName(int &i, string &c)
 
 bool Interpreter::sign(int &i)
 {
-    if ((command[i+1] == '+') || (command[i+1] == '*') || (command[i+1] == '=') || (command[i+1] == '^')) { return false; }
+    if ((command[i+1] == '+') || (command[i+1] == '*') || (command[i+1] == '=') || (command[i+1] == '^') || (command[i+1] == '<')) { return false; }
     if (command[i+1] == '-')
     {
         if (command[i] != '^') { return false; }
@@ -105,9 +110,35 @@ bool Interpreter::controlExp(int &i, string &op, int &n)
     return true;
 }
 
+bool Interpreter::verifFileName(int &i, string &c)
+{
+    while ((command[i] != '.') && (command[i] != '\0')) { c+=command[i]; i++; }
+    if (command[i] == '\0') { return false; }
+    c+=command[i]; i++;
+    if (command[i] != 'm') { return false; }
+    c+=command[i]; i++;
+    if (command[i] != 'a') { return false; }
+    c+=command[i]; i++;
+    if (command[i] != 't') { return false; }
+    c+=command[i]; i++;
+    return true;
+}
+
+void Interpreter::help()
+{
+    cout << "Addition : +" << endl;
+    cout << "Soustraction : -" << endl;
+    cout << "Multiplication : *" << endl;
+    cout << "Inverse : ^-1" << endl;
+    cout << "Transposee : ^t" << endl;
+    cout << "Puissance : ^n (ou n est un entier)" << endl;
+    cout << "Nommage d'une matrice : Nom_de_matrice<fichier.mat" << endl;
+}
+
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
-    if (op == "") { return false; }
+    if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
+    else if (op == "<") { return matrixManager.setName(matrixOut, matrix1); }
     else if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "-") { return matrixManager.subMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
