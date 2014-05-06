@@ -24,12 +24,12 @@ void Converter::convertbin(string &fileName1,string &fileName2)
         vector<int> tab(0);
         num=0;
         x=1;
-        if(caractere[i]!=';' && caractere[i]!='\n') // on peut faire a chaque espace
+        if(caractere[i]!=';' && caractere[i]!='\n' && caractere[i]!=' ') // on peut faire a chaque espace
         {
             n=caractere[i] -'0';
             tab.push_back(n);
             i++;
-            while(fichier.get(caractere[i]) && caractere[i]!=';' && caractere[i]!='\n')
+            while(fichier.get(caractere[i]) && caractere[i]!=';' && caractere[i]!='\n' && caractere[i]!=' ')
             {
                 n=caractere[i] -'0';
                 tab.push_back(n);
@@ -146,7 +146,7 @@ bool Converter::verif(string &fileName)
     {
         if(tabColonne[i]>tabColonne[i+1] && i<tabColonne.size()-1) // pour eviter le depassement
         {
-            cout<<"Probleme apres le colonne ["<<tabColonne[i]<<"]"<<endl;
+            cout<<"Probleme apres la colonne ["<<tabColonne[i]<<"]"<<endl;
             return false;
         }
     }
