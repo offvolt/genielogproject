@@ -95,14 +95,6 @@ private:
      *  false sinon
      */
     bool verifFileName(int &i, string &c);
-    
-    /*!
-     *  \brief Affiche les differentes commandes du programme
-     *
-     *  Methode d'afficher les differentes commandes du programme
-     *
-     */
-    void help();
 
 public:
     /*!
