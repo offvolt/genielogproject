@@ -107,7 +107,7 @@ bool Interpreter::controlExp(int &i, string &op, int &n)
 
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
-    if (op == "") { return false; }
+    if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
     else if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "-") { return matrixManager.subMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
