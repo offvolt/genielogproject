@@ -27,6 +27,7 @@ string Interpreter::getCommand()
 
 bool Interpreter::activeProcess(MatrixManager &matrixManager)
 {
+    if (command == "help") { help(); return true; }
     string c="", matrix1="", matrix2="", matrixOut="", op="";
     int i=0, compt=0, n=0;
     while (command[i] != '\0')
@@ -121,6 +122,17 @@ bool Interpreter::verifFileName(int &i, string &c)
     if (command[i] != 't') { return false; }
     c+=command[i]; i++;
     return true;
+}
+
+void Interpreter::help()
+{
+    cout << "Addition : +" << endl;
+    cout << "Soustraction : -" << endl;
+    cout << "Multiplication : *" << endl;
+    cout << "Inverse : ^-1" << endl;
+    cout << "Transposee : ^t" << endl;
+    cout << "Puissance : ^n (ou n est un entier)" << endl;
+    cout << "Nommage d'une matrice : Nom_de_matrice<fichier.mat" << endl;
 }
 
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
