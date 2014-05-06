@@ -94,7 +94,7 @@ void Converter::convert(string &fileName1,string &fileName2)
     }
 
     fichier.close();
-    fichier.close();
+    fichier2.close();
     
 }
 
