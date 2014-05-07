@@ -7,9 +7,13 @@ using namespace std;
 
 #include <vector>
 
-
-
 void Converter::convertbin(string &fileName1,string &fileName2)
+{
+    verif(fileName1);
+    convertbin2(fileName1,fileName2);
+}
+
+void Converter::convertbin2(string &fileName1,string &fileName2)
 {
     
     string caractere; // chiffre uniquement de 0 a 9
@@ -55,6 +59,13 @@ void Converter::convertbin(string &fileName1,string &fileName2)
             cout<<endl;
         }
         */
+        /*
+        cout<<endl;
+        cout<<"-----------------------------------"<<endl;
+        cout<<"| Converstion en binaire effectué |"<<endl;
+        cout<<"-----------------------------------"<<endl;
+        cout<<endl;
+        */
         i=0;
     }
 
@@ -95,18 +106,24 @@ void Converter::convert(string &fileName1,string &fileName2)
 
     fichier.close();
     fichier2.close();
+    /*
+    cout<<endl;
+    cout<<"-------------------------------------------"<<endl;
+    cout<<"| Converstion en fichier lisible effectué |"<<endl;
+    cout<<"-------------------------------------------"<<endl;
+    cout<<endl;
+    */
     
 }
 
 
-bool Converter::verif(string &fileName)
+void Converter::verif(string &fileName)
 {
     ifstream fichier(fileName);
     string nom="tmp.txt";
     
     Converter::convertbin(fileName,nom); // Creation d'un fichier temporaire en binaire
     ifstream fichiertmp(nom);
-    
     
     int a;
     int val(0),m(2),m2(3),m3(4),x(0);
@@ -146,8 +163,8 @@ bool Converter::verif(string &fileName)
     {
         if(tabColonne[i]>tabColonne[i+1] && i<tabColonne.size()-1) // pour eviter le depassement
         {
-            cout<<"Probleme apres la colonne ["<<tabColonne[i]<<"]"<<endl;
-            return false;
+            cout<<"ERREUR : Probleme apres la colonne ["<<tabColonne[i]<<"]"<<endl;
+            //return false;
         }
     }
     
@@ -155,8 +172,8 @@ bool Converter::verif(string &fileName)
     {
         if(tabLigne[i]>tabLigne[i+1] && i<tabLigne.size()-1)
         {
-            cout<<"Probleme apres la ligne ["<<tabLigne[i]<<"]"<<endl;
-            return false;
+            cout<<"ERREUR : Probleme apres la ligne ["<<tabLigne[i]<<"]"<<endl;
+            //return false;
         }
     }
     
@@ -165,7 +182,7 @@ bool Converter::verif(string &fileName)
         if(tabValeur[i]==0)
         {
             cout<<"ERREUR : Dans le fichier contenant la matrice on ne doit avoir mat[i][j]=0"<<endl;
-            return false;
+            //return false;
         }
     }
     
@@ -181,7 +198,7 @@ bool Converter::verif(string &fileName)
         if(x!=1)
         {
             cout<<"ERREUR : La colonne "<<i<<" n'est pas remplie"<<endl;
-            return false;
+            //return false;
         }
         x=0;
     }
@@ -190,5 +207,5 @@ bool Converter::verif(string &fileName)
     fichier.close();
     fichiertmp.close();
     
-    return true;
+    //return true;
 }
