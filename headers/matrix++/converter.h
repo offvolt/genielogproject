@@ -22,7 +22,7 @@ class Converter
     public:
     static void convertbinVerif(string &fileName1,string &fileName2);
    /*!
-    * \brief Appel la fonction convertbin2 et verif pour permettre la verification si le fichier est conforme.
+    * \brief Appel la fonction convertbin et verif pour permettre la verification si le fichier est conforme.
     * La fonction verif ne bloque pas le convertisseur mais indique que le fichier contenant la matrice n'est pas conforme.
     * \param FileName1 :Chaîne de caractere (string) qui est le fichier de lecture,
     *        FileName2 :Chaîne de caractere (string) qui est le fichier de d'ecriture soit de destination.
@@ -31,7 +31,7 @@ class Converter
     */
     static void convertbin(string &fileName1,string &fileName2); // Fichier "lisible" vers binaire
    /*!
-    * \brief Convertisseurbin2 de matrice (en format .txt par exemple) en fichier binaire avec tous les chiffres à la suite 
+    * \brief Convertisseurbin de matrice (en format .txt par exemple) en fichier binaire avec tous les chiffres à la suite 
     * \param FileName1 :Chaîne de caractere (string) qui est le fichier de lecture,
     *        FileName2 :Chaîne de caractere (string) qui est le fichier de d'ecriture soit de destination.
     * Si le fichier de destination n'existe pas il le crée automatiquement au nom donnée.
