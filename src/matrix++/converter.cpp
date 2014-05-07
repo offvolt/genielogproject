@@ -68,7 +68,7 @@ void Converter::convertbin2(string &fileName1,string &fileName2)
         */
         i=0;
     }
-
+     verif(fileName2);
      fichier.close();
      fichier2.close();
 }
@@ -122,7 +122,7 @@ void Converter::verif(string &fileName)
     ifstream fichier(fileName);
     string nom="tmp.txt";
     
-    Converter::convertbin(fileName,nom); // Creation d'un fichier temporaire en binaire
+    Converter::convertbin2(fileName,nom); // Creation d'un fichier temporaire en binaire
     ifstream fichiertmp(nom);
     
     int a;
