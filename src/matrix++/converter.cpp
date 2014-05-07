@@ -7,13 +7,13 @@ using namespace std;
 
 #include <vector>
 
-void Converter::convertbin(string &fileName1,string &fileName2)
+void Converter::convertbinVerif(string &fileName1,string &fileName2)
 {
     verif(fileName1);
-    convertbin2(fileName1,fileName2);
+    convertbin(fileName1,fileName2);
 }
 
-void Converter::convertbin2(string &fileName1,string &fileName2)
+void Converter::convertbin(string &fileName1,string &fileName2)
 {
     
     string caractere; // chiffre uniquement de 0 a 9
@@ -121,7 +121,7 @@ void Converter::verif(string &fileName)
     ifstream fichier(fileName);
     string nom="tmp.txt";
     
-    Converter::convertbin2(fileName,nom); // Creation d'un fichier temporaire en binaire
+    Converter::convertbin(fileName,nom); // Creation d'un fichier temporaire en binaire
     ifstream fichiertmp(nom);
     
     int a;
