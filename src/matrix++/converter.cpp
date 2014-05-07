@@ -68,7 +68,6 @@ void Converter::convertbin2(string &fileName1,string &fileName2)
         */
         i=0;
     }
-     verif(fileName2);
      fichier.close();
      fichier2.close();
 }
@@ -103,7 +102,7 @@ void Converter::convert(string &fileName1,string &fileName2)
         
         h++;
     }
-
+    verif(fileName2);
     fichier.close();
     fichier2.close();
     /*
