@@ -21,21 +21,23 @@ void SparseMatrix::init(string const& name, string const& fileName)
 {
 	unsigned int value = 0;
 	this->fileName = fileName;
+	string fileName_copy = fileName;
 	bool stoped = false;
 
-	// On crÃ©e le fichier binaire s'il est en txt
-	string copyFileName = fileName;
-	if(!SparseMatrix::isTypeBin(fileName))
+	// On crée le fichier binaire si le fichier lié est un txt.
+	if(!SparseMatrix::isBinType(fileName))
 	{
-		Converter::convert(fileName, SparseMatrix::replaceExtension(copyFileName));
+	    cout << "Conversion du fichier " << endl;
+        SparseMatrix::replaceExtension(this->fileName);
+		Converter::convertbin(fileName_copy, this->fileName);
 	}
 
-	// Ensuite on rÃ©cupÃ¨re hauteur et largeur du fichier
-    ifstream file(copyFileName);
+	// Ensuite on récupère hauteur et largeur du fichier
+    ifstream file(this->fileName.c_str());
     if(file)
     {
 	    if(file.read((char*)&value, sizeof(int)))
-	    	setwidth(value);
+	    	setWidth(value);
 	    else
 	    	stoped = true;
 	    if(file.read((char*)&value, sizeof(int)) && !stoped)
@@ -46,32 +48,42 @@ void SparseMatrix::init(string const& name, string const& fileName)
 	    {
 	    	setWidth(0);
 	    	setHeight(0);
-   	 		cout << "ERREUR: Pendant la lecture du fichier. VÃ©rifiez bien que le fichier ne soit pas corrompu." << endl;
+	    	setFileName("");
+   	 		cout << "ERREUR: Pendant la lecture du fichier. Vérifiez bien que le fichier ne soit pas corrompu." << endl;
 	    	return;
 	    }
 	    else
 	    {
-	    	setFileName(copyFileName);
+	    	setFileName(this->fileName);
 	    	setName(name);
 	    }
     }
 	else
 	{
    	 	cout << "ERREUR: Impossible d'ouvrir le fichier \"" << fileName << "\" en lecture." << endl;
-	}	
+	}
 }
 
 
-bool SparseMatrix::newMatrix(unsigned int &width, unsigned int &height, string &fileName)
+void SparseMatrix::newMatrix(unsigned int const& width, unsigned int const& height, string const& fileName, string const& name)
 {
-
-	// On doit d'abord vÃ©rifier si le nom du fichier existe.
-
-	// Si non, on crÃ©e ce fichier.
-
-	// On y Ã©crit le width et le height
-
-	// Cette fonction ne sera que trÃ¨s peu utilisÃ©e !
+    bool stoped = false;
+    ofstream file (fileName.c_str(), ios::out | ios::binary);
+    if(!file)
+        stoped = true;
+    else if(!file.write ((char *)&width, sizeof(unsigned int)))
+        stoped = true;
+    else if(!file.write ((char *)&height, sizeof(unsigned int)))
+        stoped = true;
+    if(stoped)
+        cout << "ERREUR SURVENUE LORS DE L'ECRITURE DANS LE FICHIER : " << fileName << endl;
+    else
+    {
+        this->fileName = fileName;
+        this->width = width;
+        this->height = height;
+        this->name = name;
+    }
 }
 
 
@@ -82,30 +94,63 @@ bool SparseMatrix::newMatrix(unsigned int &width, unsigned int &height, string &
 
 // ************************* MANY FUNCTIONS ************************** //
 
-void SparseMatrix::random(unsigned const& int min, unsigned int const& max)
+void SparseMatrix::random(unsigned int const& min, unsigned int const& max)
 {
+    bool stoped = false;
+    ofstream file (fileName.c_str(), ios::out | ios::binary);
+    srand (time(NULL));
+    if(!file)
+        stoped = true;
+    else if(!file.write ((char *)&width, sizeof(unsigned int)))
+        stoped = true;
+    else if(!file.write ((char *)&height, sizeof(unsigned int)))
+        stoped = true;
+    if(stoped)
+    {
+        cout << "ERREUR SURVENUE LORS DE L'ECRITURE DANS LE FICHIER : " << fileName << endl;
+        file.close();
+    }
+    else
+    {
+        int nb0 = 0;
+        int nbValue = 0;
+        unsigned int value = 1;
+        // On écrit la première valeur pour avoir un nb value > 0
+        value = rand() % (max+1) + min;
+        file.write((char *) &nb0, sizeof(unsigned int));            // Je me sers juste de nb 0 comme variable pour pouvoir ajouter un 0
+        file.write((char *) &nb0, sizeof(unsigned int));
+        file.write((char *) &value, sizeof(int));
 
-	// On prend le fichier 
-
-	// On le vide 
-
-	// On boucle sur height
-		// On boucle sur width
-			// Si on n'est pas en dessous des 80% de 0
-			// On prend une valeur alÃ©atoire et on l'ajoute Ã  cette case.
-	// Fin de la boucle
-
-	// Pas obligÃ© de la faire mais permet de tester
-
+        // On boucle pour générer des valeurs
+        for(unsigned int i = 0; i < height; i++)
+        {
+            for(unsigned int j = 0; j < width ; j++)
+            {
+                if((double)nb0 / (double)nbValue > (double)80 / 100)            // On n'ajoute une valeur que si il y a plus de 80 % de 0.
+                {
+                    value = rand() % (max+1) + min;
+                    file.write((char *) &i, sizeof(unsigned int));
+                    file.write((char *) &j, sizeof(unsigned int));
+                    file.write((char *) &value, sizeof(int));
+                }
+                else
+                {
+                    nb0 ++;
+                }
+                nbValue ++;
+            }
+        }
+    }
+    // Je m'en fiche un peu de mieux coder cette méthode, elle ne servira pas souvent.
 }
 
 void SparseMatrix::renameFile(string const&fileName)
 {
-
-    rename(this->fileName.c_str(), fileName.c_srt());
+    if(rename(this->fileName.c_str(), fileName.c_str()))
+        this->fileName = fileName;
 }
 
-bool SparseMatrix::isSet()
+bool SparseMatrix::isSet() const
 {
 	if(fileName == "")
 		return false;
@@ -123,11 +168,11 @@ unsigned int SparseMatrix::getWidth()const
 {
 	return width;
 }
-	
+
 unsigned int SparseMatrix::getHeight()const
 {
 	return height;
-}	
+}
 
 string SparseMatrix::getFileName()const
 {
@@ -142,9 +187,9 @@ string SparseMatrix::getName() const
 
 void SparseMatrix::setFileName(string const& fileName)
 {
-	this->fileName = fileName; 
-	/* 
-		Il faut aujouter le fait que l'on doit lire le nouveau fichier associÃ©.
+	this->fileName = fileName;
+	/*
+		Il faut aujouter le fait que l'on doit lire le nouveau fichier associé.
 	*/
 }
 
@@ -171,11 +216,11 @@ bool SparseMatrix::isBinType(string const& fileName)
 		{
 			extension = true;
 			extension_s.clear();
-			extension_s.pushback(fileName[i]);
+			extension_s.push_back(fileName[i]);
 		}
 		if(extension)
 		{
-			extension_s.pushback(fileName[i]);
+			extension_s.push_back(fileName[i]);
 		}
 	}
 	if(extension_s == binExtension);
@@ -191,7 +236,7 @@ void SparseMatrix::replaceExtension(string &fileName)
 	{
 		if(fileName[i] == '.')
 		{
-			indicePointExt = 0;
+			indicePointExt = i;
 		}
 	}
 
