@@ -1,5 +1,6 @@
 #include "sparseMatrix.h"
 
+string SparseMatrix::binExt = ".mat";
 
 // ******************** CONSTRUCTORS AND DESTRUCTORS *************************** //
 SparseMatrix::SparseMatrix()
@@ -185,6 +186,10 @@ string SparseMatrix::getName() const
 }
 
 
+string SparseMatrix::getBinExt() const
+{
+    return binExt;
+}
 void SparseMatrix::setFileName(string const& fileName)
 {
 	this->fileName = fileName;
@@ -198,14 +203,17 @@ void SparseMatrix::setName(string const& name)
 	this->name = name;
 }
 
-
+void SparseMatrix::setBinExt(string const& binExt)
+{
+    SparseMatrix::binExt = binExt;
+}
 
 
 
 // ************************ STATIC UTILITIES *************************** //
 bool SparseMatrix::isBinType(string const& fileName)
 {
-	string binExtension = ".mat";
+	string binExtension = SparseMatrix::binExt;
 
 	bool extension = false;
 	string extension_s = "";
@@ -223,12 +231,14 @@ bool SparseMatrix::isBinType(string const& fileName)
 			extension_s.push_back(fileName[i]);
 		}
 	}
-	if(extension_s == binExtension);
+	if(extension_s == binExtension)
+        return true;
+    return false;
 }
 
 void SparseMatrix::replaceExtension(string &fileName)
 {
-	string binExtension = ".mat";
+	string binExtension = SparseMatrix::binExt;
 
 	unsigned int indicePointExt = 0;
 
@@ -260,3 +270,5 @@ void SparseMatrix::setHeight(unsigned int const& height)
 {
 	this->height = height;
 }
+
+

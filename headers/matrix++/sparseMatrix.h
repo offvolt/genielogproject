@@ -23,6 +23,7 @@ using namespace std;
 class SparseMatrix
 {
 private:
+    static string binExt;
 	string fileName;
 	string name;
 	unsigned int width;
@@ -127,14 +128,14 @@ public:
 	 *	Retourne la largeur de la matrice.
 	 *	\return La largeur de la matrice.
 	 */
-	unsigned int getWidth()const;				///< Récupère la largeur.
+	unsigned int getWidth()const;
 
 	/*!
 	 *	\fn unsigned int getHeight() const
 	 *	\brief Retourne la hauteur de la matrice.
 	 *	\return La hauteur de la matrice.
 	 */
-	unsigned int getHeight()const;				///< Modifie la largeur.
+	unsigned int getHeight()const;
 
 	/*!
 	 *	\fn string getFileName() const
@@ -144,7 +145,7 @@ public:
 	 *	A ne pas confondre avec le nom de la matrice.
 	 *	\return Le nom du fichier.
 	 */
-	string getFileName()const;				///< On récupère le nom du fichier.
+	string getFileName()const;
 
 	/*!
 	 *	\fn string getName() const
@@ -154,7 +155,17 @@ public:
 	 *	A ne pas confondre avec le nom du fichier.
 	 *	\return Le nom de la matrice.
 	 */
-	string getName() const;					///< Récupère le nom.
+	string getName() const;
+
+	/*!
+	 *	\fn string getBinExt() const
+	 *	\brief Retourne l'extension binaire des fichiers.
+	 *
+	 *	Retourne l'extension binaire des fichiers.
+	 *  C'est en fait une configuration.
+	 *	\return L'extension binaire des fichiers.
+	 */
+	string getBinExt() const;
 
 	/*
 	 *	\fn void setFileName(string const& fileName)
@@ -164,7 +175,7 @@ public:
 	 *	l'extension est bonne.
 	 *	\param fileName le nouveau nom du fichier.
 	 */
-	void setFileName(string const& fileName);			///< On modifie le nom du fichier et on récupère ses valeurs.
+	void setFileName(string const& fileName);
 
 	/*
 	 *	\fn void setName(string const& name)
@@ -173,7 +184,17 @@ public:
 	 *	Modifie le nom de la matrice.
 	 *	\param name le nouveau nom de la matrice.
 	 */
-	void setName(string const& name);				///< On modifie le nom de la matrice.
+	void setName(string const& name);
+
+	/*
+	 *	\fn static void setBinExt(string const& binExt)
+	 *	\brief Modifie l'extension des fichiers binaire
+	 *
+	 *	Modifie l'extension la norme de l'extension des fichiers binaire.
+	 *
+	 *	\param L'extension d'un fichier binaire.
+	 */
+	static void setBinExt(string const& binExt);
 
 // ************************ STATIC UTILITIES *************************** //
 	/*
