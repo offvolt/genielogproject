@@ -15,14 +15,14 @@ void Converter::convertbinVerif(string &fileName1,string &fileName2)
 
 void Converter::convertbin(string &fileName1,string &fileName2)
 {
-    
+
     string caractere; // chiffre uniquement de 0 a 9
     int i(0),x(1),n;
     int num=0;
-    
-    ifstream fichier(fileName1);
-    ofstream fichier2 (fileName2, ios::out | ios::binary);
-    
+
+    ifstream fichier(fileName1.c_str());
+    ofstream fichier2 (fileName2.c_str(), ios::out | ios::binary);
+
     while(fichier.get(caractere[i]))
     {
         vector<int> tab(0);
@@ -76,9 +76,10 @@ void Converter::convertbin(string &fileName1,string &fileName2)
 void Converter::convert(string &fileName1,string &fileName2)
 {
 
-    ifstream fichier(fileName1);
-    ofstream fichier2(fileName2);
+    ifstream fichier(fileName1.c_str(), ios::binary);
+    ofstream fichier2(fileName2.c_str());
     int a;
+    unsigned int i = 0;
     int h(0),m(0);
     while(fichier.read ((char *)&a, sizeof(int)))
     {
@@ -99,8 +100,9 @@ void Converter::convert(string &fileName1,string &fileName2)
             m=h+3;
         }
         else fichier2 <<a<<";";
-        
+
         h++;
+        i++;
     }
     verif(fileName2);
     fichier.close();
@@ -112,23 +114,23 @@ void Converter::convert(string &fileName1,string &fileName2)
     cout<<"-------------------------------------------"<<endl;
     cout<<endl;
     */
-    
+
 }
 
 
 void Converter::verif(string &fileName)
 {
-    ifstream fichier(fileName);
+    ifstream fichier(fileName.c_str());
     string nom="tmp.txt";
-    
+
     Converter::convertbin(fileName,nom); // Creation d'un fichier temporaire en binaire
-    ifstream fichiertmp(nom);
-    
+    ifstream fichiertmp(nom.c_str(), ios::binary);
+
     int a;
     int val(0),m(2),m2(3),m3(4),x(0);
-    
+
     vector<int> tab(0);
-    
+
     while(fichiertmp.read ((char *)&a, sizeof(int)) )
     {
         tab.push_back(a); // Recupere toutes les données de la matrice
@@ -138,7 +140,7 @@ void Converter::verif(string &fileName)
     vector<int> tabLigne(0);
     vector<int> tabColonne(0);
     vector<int> tabValeur(0);
-    
+
     for(int i=2 ; i<sizeTab; i++)
     {
         if(m==i)
@@ -157,16 +159,16 @@ void Converter::verif(string &fileName)
             m3=m3+3;
         }
     }
-    
+
     for(int i=0 ; i<tabColonne.size(); i++) // Verifie si les colonnes en ordre croissant
     {
         if(tabColonne[i]>tabColonne[i+1] && i<tabColonne.size()-1) // pour eviter le depassement
         {
-            cout<<"ERREUR : Probleme apres la colonne ["<<tabColonne[i]<<"]"<<endl;
+            cout<<"ERREUR : Probleme apres la colonne ["<<tabColonne[i]<<"] suivi de [" << tabColonne[i+1] << "]"<<endl;
             //return false;
         }
     }
-    
+
     for(int i=0 ; i<tabLigne.size(); i++) // Verifie si les ligne en ordre croissant
     {
         if(tabLigne[i]>tabLigne[i+1] && i<tabLigne.size()-1)
@@ -175,7 +177,7 @@ void Converter::verif(string &fileName)
             //return false;
         }
     }
-    
+
     for(int i=0 ; i<tabValeur.size(); i++) // Verifie si une valeur == 0
     {
         if(tabValeur[i]==0)
@@ -184,10 +186,10 @@ void Converter::verif(string &fileName)
             //return false;
         }
     }
-    
+
     // Verification si chaque colone a une valeur
-    
-    
+
+
     for(int i=0 ; i<tabColonne.size(); i++) // Verifie si les colonnes en ordre croissant
     {
         for(int j=0 ; j<tabColonne.size(); j++) // Verifie si les colonnes en ordre croissant
@@ -201,10 +203,10 @@ void Converter::verif(string &fileName)
         }
         x=0;
     }
-    
+
     remove("tmp.txt"); // Supprime le fichier temporaire
     fichier.close();
     fichiertmp.close();
-    
+
     //return true;
 }
