@@ -5,6 +5,7 @@ string SparseMatrix::binExt = ".mat";
 // ******************** CONSTRUCTORS AND DESTRUCTORS *************************** //
 SparseMatrix::SparseMatrix()
 {
+    srand (time(NULL));
 	fileName = "";
 	name = "";
 	width = 0;
@@ -63,6 +64,8 @@ void SparseMatrix::init(string const& name, string const& fileName)
 	{
    	 	cout << "ERREUR: Impossible d'ouvrir le fichier \"" << fileName << "\" en lecture." << endl;
 	}
+	file.close();
+
 }
 
 
@@ -85,6 +88,7 @@ void SparseMatrix::newMatrix(unsigned int const& width, unsigned int const& heig
         this->height = height;
         this->name = name;
     }
+    file.close();
 }
 
 
@@ -99,7 +103,6 @@ void SparseMatrix::random(unsigned int const& min, unsigned int const& max)
 {
     bool stoped = false;
     ofstream file (fileName.c_str(), ios::out | ios::binary);
-    srand (time(NULL));
     if(!file)
         stoped = true;
     else if(!file.write ((char *)&width, sizeof(unsigned int)))
@@ -113,6 +116,7 @@ void SparseMatrix::random(unsigned int const& min, unsigned int const& max)
     }
     else
     {
+        cout << "GENERATION D'UN FICHIER RANDOM. " << endl;
         int nb0 = 0;
         int nbValue = 0;
         unsigned int value = 1;
@@ -141,6 +145,7 @@ void SparseMatrix::random(unsigned int const& min, unsigned int const& max)
                 nbValue ++;
             }
         }
+        file.close();
     }
     // Je m'en fiche un peu de mieux coder cette méthode, elle ne servira pas souvent.
 }
@@ -254,7 +259,6 @@ void SparseMatrix::replaceExtension(string &fileName)
 		fileName = fileName + binExtension;
 	else																// Sinon on remplace.
 		fileName = fileName.substr(0, indicePointExt) + binExtension;
-
 }
 
 
