@@ -127,7 +127,7 @@ void Converter::verif(string &fileName)
     ifstream fichiertmp(nom.c_str(), ios::binary);
 
     int a;
-    int val(0),m(2),m2(3),m3(4),x(0);
+    int val(0),m(2),m2(3),m3(4),x(0),y(0);
 
     vector<int> tab(0);
 
@@ -141,6 +141,7 @@ void Converter::verif(string &fileName)
     vector<int> tabColonne(0);
     vector<int> tabValeur(0);
 
+    // On stocke chaque partie dans des tableaux different
     for(int i=2 ; i<sizeTab; i++)
     {
         if(m==i)
@@ -162,10 +163,13 @@ void Converter::verif(string &fileName)
 
     for(int i=0 ; i<tabColonne.size(); i++) // Verifie si les colonnes en ordre croissant
     {
-        if(tabColonne[i]>tabColonne[i+1] && i<tabColonne.size()-1) // pour eviter le depassement
+        if(tabLigne[i]==tabLigne[i+1])
         {
-            cout<<"ERREUR : Probleme apres la colonne ["<<tabColonne[i]<<"] suivi de [" << tabColonne[i+1] << "]"<<endl;
-            //return false;
+            if(tabColonne[i]>tabColonne[i+1] && i<tabColonne.size()-1) // pour eviter le depassement
+            {
+                cout<<"ERREUR : Probleme apres la colonne ["<<tabColonne[i]<<"] suivi de [" << tabColonne[i+1] << "]"<<endl;
+                //return false;
+            }
         }
     }
 
@@ -176,6 +180,13 @@ void Converter::verif(string &fileName)
             cout<<"ERREUR : Probleme apres la ligne ["<<tabLigne[i]<<"]"<<endl;
             //return false;
         }
+        if((tab[0]-1)<tabLigne[i]) y=1;
+        if(y==1)
+        {
+            cout<<"ERREUR Ligne: La dimmension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
+            //return false;
+        }
+        y=0;
     }
 
     for(int i=0 ; i<tabValeur.size(); i++) // Verifie si une valeur == 0
@@ -186,15 +197,26 @@ void Converter::verif(string &fileName)
             //return false;
         }
     }
-
+    
+    int tabtmp[tab[0]]; // permet d'avoir un tableau de la taille de la longueur
+    for(int i=0 ; i<tab[0]; i++)
+    {
+        tabtmp[i]=x;
+        x++;
+    }
+    x=0;
+    
     // Verification si chaque colone a une valeur
 
 
-    for(int i=0 ; i<tabColonne.size(); i++) // Verifie si les colonnes en ordre croissant
+    //for(int i=0 ; i<tabColonne.size(); i++)
+    for(int i=0 ; i<tab[0]; i++)
     {
-        for(int j=0 ; j<tabColonne.size(); j++) // Verifie si les colonnes en ordre croissant
+        for(int j=0 ; j<tabColonne.size(); j++)
         {
-            if(i==tabColonne[j]) x=1;
+            //if(i==tabColonne[j]) x=1;
+            if(tabtmp[i]==tabColonne[j]) x=1;
+            if((tab[0]-1)<tabColonne[j]) y=1;
         }
         if(x!=1)
         {
@@ -203,6 +225,11 @@ void Converter::verif(string &fileName)
         }
         x=0;
     }
+    if(y==1)
+    {
+        cout<<"ERREUR Colonne: La dimmension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
+        //return false;
+    }
 
     remove("tmp.txt"); // Supprime le fichier temporaire
     fichier.close();
@@ -210,3 +237,4 @@ void Converter::verif(string &fileName)
 
     //return true;
 }
+
