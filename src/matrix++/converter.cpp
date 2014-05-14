@@ -183,7 +183,7 @@ void Converter::verif(string &fileName)
         if((tab[0]-1)<tabLigne[i]) y=1;
         if(y==1)
         {
-            cout<<"ERREUR Ligne: La dimmension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
+            cout<<"ERREUR Ligne: La dimension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
             //return false;
         }
         y=0;
@@ -227,7 +227,7 @@ void Converter::verif(string &fileName)
     }
     if(y==1)
     {
-        cout<<"ERREUR Colonne: La dimmension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
+        cout<<"ERREUR Colonne: La dimension de la grille est ["<<tab[0]<<"] x ["<<tab[1]<<"]"<<endl;
         //return false;
     }
 
