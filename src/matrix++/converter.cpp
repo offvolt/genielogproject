@@ -21,8 +21,12 @@ void Converter::convertbin(string &fileName1,string &fileName2)
     int num=0;
 
     ifstream fichier(fileName1.c_str());
+    if(!fichier)
+    {
+        cout << "Fichier " << fileName1.c_str() << " ne peut pas etre ouvert." << endl;
+        return;
+    }
     ofstream fichier2 (fileName2.c_str(), ios::out | ios::binary);
-
     while(fichier.get(caractere[i]))
     {
         vector<int> tab(0);
@@ -77,6 +81,11 @@ void Converter::convert(string &fileName1,string &fileName2)
 {
 
     ifstream fichier(fileName1.c_str(), ios::binary);
+    if(!fichier)
+    {
+        cout << "Fichier " << fileName1.c_str() << " ne peut pas etre ouvert." << endl;
+        return;
+    }
     ofstream fichier2(fileName2.c_str());
     int a;
     unsigned int i = 0;
