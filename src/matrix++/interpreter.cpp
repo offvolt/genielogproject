@@ -1,6 +1,4 @@
-#include <iostream>
 #include "interpreter.h"
-#include <sstream>
 
 using namespace std;
 
@@ -25,9 +23,11 @@ string Interpreter::getCommand()
   else { return command; }
 }
 
+
+// ERROR : Help toujours pas implémenté.
 bool Interpreter::activeProcess(MatrixManager &matrixManager)
 {
-    if (command == "help") { help(); return true; }
+    //if (command == "help") { help(); return true; }
     string c="", matrix1="", matrix2="", matrixOut="", op="";
     int i=0, compt=0, n=0;
     while (command[i] != '\0')
@@ -124,7 +124,8 @@ bool Interpreter::verifFileName(int &i, string &c)
     return true;
 }
 
-void Interpreter::help()
+// ERROR : No void interpreter::help() member function declared
+/*void Interpreter::help()
 {
     cout << "Addition : +" << endl;
     cout << "Soustraction : -" << endl;
@@ -133,13 +134,14 @@ void Interpreter::help()
     cout << "Transposee : ^t" << endl;
     cout << "Puissance : ^n (ou n est un entier)" << endl;
     cout << "Nommage d'une matrice : Nom_de_matrice<fichier.mat" << endl;
-}
+}*/
 
+// ERROR : Je ne les ai toujours pas implémentées. (equalMatrix et setName)
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
-    if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
-    else if (op == "<") { return matrixManager.setName(matrixOut, matrix1); }
-    else if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
+    //if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
+    //else if (op == "<") { return matrixManager.setName(matrixOut, matrix1); }
+    if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "-") { return matrixManager.subMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "^-1") { return matrixManager.inverseMatrix(matrix1, matrixOut); }

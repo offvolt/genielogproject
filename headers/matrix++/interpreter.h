@@ -9,7 +9,8 @@
 
 #include <iostream>
 #include <string>
-
+#include <sstream>
+#include "matrixManager.h"
 using namespace std;
 
 
