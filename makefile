@@ -9,8 +9,15 @@ REPLIB=matrix++/
 #prog: libmatrix++.a $(SRC)/main.cpp
 #	g++ -o $(BIN)prog -lmatrix++ main.cpp -L $(LIB) -I $(HEADERS)
 	
-libmatrix++.a: converter.o interpreter.o matrixManager.o sparseMatrix.o
-	ar rv $(LIB)libmatrix++.a $(OBJECT)converter.o $(OBJECT)interpreter.o $(OBJECT)matrixManager.o $(OBJECT)sparseMatrix.o
+interpreter: $(SRC)mainInterpreter.cpp $(LIB)libmatrix++.a
+	g++ -o $(BIN)interpreter $(SRC)mainInterpreter.cpp -L$(LIB) -lmatrix++ -I $(HEADERS)$(REPLIB)
+	
+converter: $(SRC)mainConverter.cpp $(LIB)libmatrix++.a
+	g++ -o $(BIN)converter $(SRC)mainConverter.cpp -L$(LIB) -lmatrix++ -I $(HEADERS)$(REPLIB)
+
+
+$(LIB)libmatrix++.a: converter.o interpreter.o matrixManager.o sparseMatrix.o matrixCase.o
+	ar rv $(LIB)libmatrix++.a $(OBJECT)converter.o $(OBJECT)interpreter.o $(OBJECT)matrixManager.o $(OBJECT)sparseMatrix.o $(OBJECT)matrixCase.o
 
 converter.o: $(SRC)$(REPLIB)converter.cpp $(HEADERS)$(REPLIB)converter.h
 	g++ -o $(OBJECT)converter.o -c $(SRC)$(REPLIB)converter.cpp -I $(HEADERS)$(REPLIB)

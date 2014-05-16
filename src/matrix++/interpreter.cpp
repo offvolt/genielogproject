@@ -142,9 +142,9 @@ bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string
     //if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
     //else if (op == "<") { return matrixManager.setName(matrixOut, matrix1); }
     if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
-    else if (op == "-") { return matrixManager.subMatrix(matrix1, matrix2, matrixOut); }
+    else if (op == "-") { return true; /*matrixManager.subMatrix(matrix1, matrix2, matrixOut);*/ }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
-    else if (op == "^-1") { return matrixManager.inverseMatrix(matrix1, matrixOut); }
-    else if (op == "^") { return matrixManager.puisMatrix(matrix1, n, matrixOut); }
-    else if (op == "^t") { return matrixManager.transpMatrix(matrix1, matrixOut); }
+    else if (op == "^-1") { return true; /*matrixManager.inverseMatrix(matrix1, matrixOut);*/ }
+    else if (op == "^") { return true;/*matrixManager.puisMatrix(matrix1, n, matrixOut);*/ }
+    else if (op == "^t") { return true;/*matrixManager.transpMatrix(matrix1, matrixOut);*/ }
 }

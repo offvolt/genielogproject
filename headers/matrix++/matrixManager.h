@@ -35,12 +35,12 @@ public:
 
     // MATRIX FUNCTIONS
 	bool addMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A+B et on met ça dans matrixOut.
-	bool subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A-B et on met ça dans matrixOut.
+	//bool subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A-B et on met ça dans matrixOut.
 	bool multMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A*B et on met ça dans matrixOut.
-	bool inverseMatrix(string const& matrixA, string const& matrixOut);			        // On inverse A et on met ça dans matrixOut.
+	/*bool inverseMatrix(string const& matrixA, string const& matrixOut);			        // On inverse A et on met ça dans matrixOut.
 	bool puisMatrix(string const& matrixA, unsigned int const& n, string const& matrixOut);	// On fait A^n et on met ça dans matrixOut.
 	bool transpMatrix(string const& MatrixA, string const& matrixOut);			        // On fait la transposée de A et on met ça dans matrixOut.
-
+	*/
 	// A savoir : string &matrix[X] est le nom d'une matrice.
 	// A savoir : si MatrixOut n'existe pas, on crée un nouveau fichier.
 	// A ajouter les mêmes fonctionnalités pas rapport à des noms de fichier et non pas des noms de matrice. ???

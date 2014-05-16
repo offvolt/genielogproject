@@ -181,13 +181,13 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
 
 
 
-bool MatrixManager::subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut)
+/*bool MatrixManager::subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut)
 {
 
 return true;
 
 }	// On fait A-B et on met ça dans matrixOut.
-
+*/
 
 
 
