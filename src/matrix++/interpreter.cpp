@@ -119,12 +119,8 @@ bool Interpreter::verifFileName(int &i, string &c)
     while ((command[i] != '.') && (command[i] != '\0')) { c+=command[i]; i++; }
     if (command[i] == '\0') { return false; }
     c+=command[i]; i++;
-    if (command[i] != 'm') { return false; }
-    c+=command[i]; i++;
-    if (command[i] != 'a') { return false; }
-    c+=command[i]; i++;
-    if (command[i] != 't') { return false; }
-    c+=command[i]; i++;
+    if (command[i] == '\0') { return false; }
+    while (command[i] != '\0') { if (command[i] == '.') { return false; } else { c+=command[i]; i++; } }
     return true;
 }
 
@@ -132,7 +128,7 @@ bool Interpreter::verifFileName(int &i, string &c)
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
     //if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
-    if (op == "<") { return matrixManager.add(matrix1, matrixOut); }
+    if (op == "<") { matrixManager.add(matrix1, matrixOut); return true; }
     else if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "-") { return true; /*matrixManager.subMatrix(matrix1, matrix2, matrixOut);*/ }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
