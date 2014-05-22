@@ -301,28 +301,7 @@ bool transpMatrix(string const& MatrixA, string const& matrixOut)
 
 bool MatrixManager::display(string const& name)
 {
-    cout << "AFFICHAGE " << std::endl;
-	SparseMatrix mA = getMatrix(name);
 
-    mA.getFileName();
-    ifstream matrixA_file(mA.getFileName().c_str(), ios::binary);
-
-    if(matrixA_file)
-    {
-        MatrixCase matrixCase;
-
-        cout << "MATRICE [" << mA.getName() << "]" << std::endl;
-        cout << "Hauteur : " << mA.getHeight() << std::endl;
-        cout << "Largeur : " << mA.getWidth() << std::endl;
-        matrixA_file.seekg(8);
-        while(readCase(matrixA_file, matrixCase))
-        {
-            std::cout << matrixCase.getI() << " , " << matrixCase.getJ() << " => " << matrixCase.getValue() << std::endl;
-        }
-    }
-    else
-        return false;
-    return true;
 
 }
 void MatrixManager::setMatrix(SparseMatrix const&matrixOut)

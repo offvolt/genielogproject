@@ -128,12 +128,12 @@ bool Interpreter::verifFileName(int &i, string &c)
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
     //if (op == "") { if ((matrixOut != "") && (matrix1 != "")) { return matrixManager.equalMatrix(matrixOut, matrix1); } else { return false; } }
-    if (op == "<") { matrixManager.add(matrix1, matrixOut); return true; }
+    if (op == "<") { matrixManager.add(matrixOut, matrix1); return true; }
     else if (op == "+") { return matrixManager.addMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "-") { return true; /*matrixManager.subMatrix(matrix1, matrix2, matrixOut);*/ }
     else if (op == "*") { return matrixManager.multMatrix(matrix1, matrix2, matrixOut); }
     else if (op == "^-1") { return true; /*matrixManager.inverseMatrix(matrix1, matrixOut);*/ }
     else if (op == "^") { return true;/*matrixManager.puisMatrix(matrix1, n, matrixOut);*/ }
     else if (op == "^t") { return true;/*matrixManager.transpMatrix(matrix1, matrixOut);*/ }
-    else if (op =="aff") { return true;/*matrixManager.display(matrix1);*/ }
+    else if (op =="aff") { return matrixManager.display(matrix1); }
 }

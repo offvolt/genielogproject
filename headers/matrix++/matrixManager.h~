@@ -32,7 +32,7 @@ public:
     void add(SparseMatrix const& sparseMatrix);             // Ajoute une matrix à la liste.
     void del(SparseMatrix const& sparseMatrix);             // Supprime une matrix de la liste.
 	bool isSet(string const& matrixName);                   // Vérifie si une matrice existe déjà.
-	bool display(string const& name);			// Affiche une matrice.
+	void display(string const& name);			// Affiche une matrice.
     // MATRIX FUNCTIONS
 	bool addMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A+B et on met ça dans matrixOut.
 	//bool subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A-B et on met ça dans matrixOut.
