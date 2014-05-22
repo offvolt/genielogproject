@@ -6,8 +6,8 @@ OBJECT=objects/
 
 REPLIB=matrix++/
 
-#prog: libmatrix++.a $(SRC)/main.cpp
-#	g++ -o $(BIN)prog -lmatrix++ main.cpp -L $(LIB) -I $(HEADERS)
+prog: $(SRC)main.cpp $(LIB)libmatrix++.a 
+	g++ -o $(BIN)prog $(SRC)main.cpp -lmatrix++ -L $(LIB) -I $(HEADERS)$(REPLIB)
 	
 interpreter: $(SRC)mainInterpreter.cpp $(LIB)libmatrix++.a
 	g++ -o $(BIN)interpreter $(SRC)mainInterpreter.cpp -L$(LIB) -lmatrix++ -I $(HEADERS)$(REPLIB)
