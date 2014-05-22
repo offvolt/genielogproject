@@ -31,7 +31,7 @@ bool Interpreter::activeProcess(MatrixManager &matrixManager)
     while (command[i] != '\0')
     {
         if (!matrixName(i, c)) { return false; }
-        if ((command[i] == "\0") && (matrix1 == ""))
+        if ((command[i] == '\0') && (matrix1 == ""))
         {
           op="aff";
           matrix1=command;
