@@ -24,15 +24,19 @@ string Interpreter::getCommand()
 }
 
 
-// ERROR : Help toujours pas implémenté.
 bool Interpreter::activeProcess(MatrixManager &matrixManager)
 {
-    //if (command == "help") { help(); return true; }
     string c="", matrix1="", matrix2="", matrixOut="", op="";
     int i=0, compt=0, n=0;
     while (command[i] != '\0')
     {
         if (!matrixName(i, c)) { return false; }
+        if ((command[i] == "\0") && (matrix1 == ""))
+        {
+          op="aff";
+          matrix1=command;
+          return operation(op, matrix1, matrix2, matrixOut, n, matrixManager);
+        }
         if (i == 0) { return false; }
         if (command[i] == '<') { matrixOut=c; i++; c=""; if (!verifFileName(i, c)) { return false; } op="<"; matrix1=c; }
         else
@@ -124,18 +128,6 @@ bool Interpreter::verifFileName(int &i, string &c)
     return true;
 }
 
-// ERROR : No void interpreter::help() member function declared
-/*void Interpreter::help()
-{
-    cout << "Addition : +" << endl;
-    cout << "Soustraction : -" << endl;
-    cout << "Multiplication : *" << endl;
-    cout << "Inverse : ^-1" << endl;
-    cout << "Transposee : ^t" << endl;
-    cout << "Puissance : ^n (ou n est un entier)" << endl;
-    cout << "Nommage d'une matrice : Nom_de_matrice<fichier.mat" << endl;
-}*/
-
 // ERROR : Je ne les ai toujours pas implémentées. (equalMatrix et setName)
 bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string &matrixOut, int &n, MatrixManager &matrixManager)
 {
@@ -147,4 +139,5 @@ bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string
     else if (op == "^-1") { return true; /*matrixManager.inverseMatrix(matrix1, matrixOut);*/ }
     else if (op == "^") { return true;/*matrixManager.puisMatrix(matrix1, n, matrixOut);*/ }
     else if (op == "^t") { return true;/*matrixManager.transpMatrix(matrix1, matrixOut);*/ }
+    else if (op =="aff") { return true;/*matrixManager.display(matrix1);*/ }
 }
