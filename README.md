@@ -1,3 +1,5 @@
+A savoir que la librairie fonctionne, il y a juste un probleme du choix du fichier dans lequel on met les informations de la matrice.
+Soit, si une matrice ne correspond pas à ce que l'on a demande, se referer aux fichiers .tmp et .txt
 Informations sur le projet
 
 Penser a  faire une fonction pour verifier que la matrice est bien correcte. Car dans chaque colonne elle doit avoir au moin un chiffre alors que les lignes vides ce n'est pas grave. (Definition d'une matrice creuse)
