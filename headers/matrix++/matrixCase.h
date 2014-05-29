@@ -1,3 +1,11 @@
+/*!
+ * \file MatrixCase.h
+ * \brief classe representant une ligne du fichier qui est utile a matrixManager
+ * \version 1.0
+ */
+
+
+
 #ifndef MATRIXCASE_H_INCLUDED
 #define MATRIXCASE_H_INCLUDED
 
