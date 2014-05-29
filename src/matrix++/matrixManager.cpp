@@ -60,7 +60,10 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
 
 // GET THE WITH AND HEIGHT
 	SparseMatrix mA = getMatrix(matrixA),
-                 mB = getMatrix(matrixB);
+                 mB = getMatrix(matrixB),
+   		 mC;
+        if(matrixOut != "");
+		mC = getMatrix(matrixOut);
 
 // CASE ERROR : WIDTH AND HEIGHT
     if(mA.getWidth() != mB.getWidth() || mA.getHeight() != mB.getHeight())
@@ -76,7 +79,11 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
 // READING FILE AND VARIABLES
     ifstream matrixA_file(mA.getFileName().c_str(), ios::binary);
     ifstream matrixB_file(mB.getFileName().c_str(), ios::binary);
-    ofstream matrixC_file(".tmp", ios::binary);
+    ofstream matrixC_file;
+    if(matrixOut == "")
+        matrixC_file.open(".tmp", ios::binary);
+    else
+        matrixC_file.open(mC.getFileName().c_str(), ios::binary);
 
     MatrixCase cA,
                cB,
@@ -206,8 +213,10 @@ bool MatrixManager::multMatrix(string const& matrixA, string const& matrixB, str
 
 // GET THE WITH AND HEIGHT
 	SparseMatrix mA = getMatrix(matrixA),
-                 mB = getMatrix(matrixB);
-
+                 mB = getMatrix(matrixB),
+  		mC;
+	if(matrixOut == "")
+		mC = getMatrix(matrixOut);
 // CASE ERROR : WIDTH AND HEIGHT
     if(mA.getWidth() != mB.getHeight())
     {
@@ -219,8 +228,11 @@ bool MatrixManager::multMatrix(string const& matrixA, string const& matrixB, str
 // READING FILE
     ifstream matrixA_file(mA.getFileName().c_str(), ios::binary);
     ifstream matrixB_file(mB.getFileName().c_str(), ios::binary);
-    ofstream matrixC_file(".tmp", ios::binary);
-
+    ofstream matrixC_file;
+    if(matrixOut == "")
+        matrixC_file.open(".tmp", ios::binary);
+    else
+        matrixC_file.open(mC.getFileName().c_str(), ios::binary);
     // c pour current
     MatrixCase cA,
                cB,
