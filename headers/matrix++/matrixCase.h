@@ -1,6 +1,11 @@
 #ifndef MATRIXCASE_H_INCLUDED
 #define MATRIXCASE_H_INCLUDED
 
+/*! \class MatrixCase
+ * \brief classe representant une ligne du fichier qui est utile a matrixManager
+ */
+
+
 class MatrixCase
 {
 private:
