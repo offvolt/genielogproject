@@ -14,12 +14,16 @@ int main()
 	Interpreter interpreter;
 	unsigned int input = 100;
 	string input2 = "";
+	string tmp = "";
+	string tmp2 = "";
+
 	MatrixManager matrixManager;
 	do
 	{
 		cout << "MENU : " << endl;
 		cout << "1- Passer en mode Exec" << endl;
 		cout << "2- Help" << endl;
+		cout << "3- Convert" << endl;
 		cout << "0- Quitter" << endl;
 		do
 		{
@@ -55,6 +59,12 @@ int main()
 				help();
 				cout << endl;
 				cout << endl;
+			case 3:
+				cout << "Nom du fichier (sans extension) : " << endl;
+				cin >> input2;
+				tmp = input2 + ".txt";
+				tmp2 = input2 + ".mat";
+				Converter::convert(tmp, tmp2);
 			break;
 		}
 	}while(input != 0);
@@ -65,6 +75,8 @@ int main()
 void help()
 {
 	cout << "********** Help du logiciel **********" << endl;
+	cout << "** Conversion" << endl;
+	cout << "Au menu principal, il est possible de demander une conversion. A ce moment-la, vous devrez donner le nom du fichier sans son extension. S'il existe en binaire, il sera reconverti en txt avec l'extension .txt." << endl;
 	cout << "** Mode Exec" << endl;
 	cout << "Le mode execution attend de vous une commande." << endl << endl;
 	cout << "** Commandes irregulieres" << endl;
