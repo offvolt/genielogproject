@@ -16,7 +16,7 @@ using namespace std;
 
 /*! \class Converter
  * \brief classe representant le converter.
- *  La classe gere le traitement d'une convertion d'un fichier binaire vers un fichier texte.
+ *  La class gere le traitement d'une convertion d'un fichier binaire vers un fichier texte.
  *  Et la convertion d'un fichier texte vers du binaire.
  */
 
