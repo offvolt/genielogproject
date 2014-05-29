@@ -1,5 +1,6 @@
 /*!
  * \file MatrixManager.h
+ * \brief class qui permet de gere les matrices.
  * \version 1.0
  */
 
