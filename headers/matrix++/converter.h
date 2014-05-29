@@ -3,17 +3,23 @@
  * \brief Convertisseur de matrice (en format .txt par exemple) en fichier binaire avec tous les chiffres a la suite 
  * et de binaire en fichier (txt  par exemple) sous forme de matrice
  * Deplus on une fonction de verification de la matrice.
- * \return Rien - Arrêt normal du programme.
  * \author SERRE Jeremy
  * \version 1.0
  */
-
 
 #include <iostream>
 #include <string>
 #include <fstream>
 
 using namespace std;
+
+
+/*! \class Converter
+ * \brief classe representant le converter.
+ *  La classe gere le traitement d'une convertion d'un fichier binaire vers un fichier texte.
+ *  Et la convertion d'un fichier texte vers du binaire.
+ */
+
 
 class Converter
 {
