@@ -136,4 +136,5 @@ bool Interpreter::operation(string &op, string &matrix1, string &matrix2, string
     else if (op == "^") { return true;/*matrixManager.puisMatrix(matrix1, n, matrixOut);*/ }
     else if (op == "^t") { return true;/*matrixManager.transpMatrix(matrix1, matrixOut);*/ }
     else if (op =="aff") { return matrixManager.display(matrix1); }
+    return false;
 }
