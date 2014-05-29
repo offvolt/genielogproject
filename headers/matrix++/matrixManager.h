@@ -1,3 +1,10 @@
+/*!
+ * \file MatrixManager.h
+ * \version 1.0
+ */
+
+
+
 #ifndef MATRIXMANAGER_H_INCLUDED
 #define MATRIXMANAGER_H_INCLUDED
 
@@ -7,6 +14,12 @@
 #include <vector>
 #include <list>
 using namespace std;
+
+
+
+/*! \class MatrixManager
+ * \brief class qui permet de gere les matrices.
+ */
 class MatrixManager
 {
 private:
@@ -28,25 +41,25 @@ public:
 	void clear();
 
     // MANAGER
-    void add(string const& name, string const& fileName);   // Crée la sparseMatrix dans la mémoire et l'ajoute avec la fonction add.
-    void add(SparseMatrix const& sparseMatrix);             // Ajoute une matrix à la liste.
+    void add(string const& name, string const& fileName);   // Crï¿½e la sparseMatrix dans la mï¿½moire et l'ajoute avec la fonction add.
+    void add(SparseMatrix const& sparseMatrix);             // Ajoute une matrix ï¿½ la liste.
     void del(SparseMatrix const& sparseMatrix);             // Supprime une matrix de la liste.
-	bool isSet(string const& matrixName);                   // Vérifie si une matrice existe déjà.
+	bool isSet(string const& matrixName);                   // Vï¿½rifie si une matrice existe dï¿½jï¿½.
 	bool display(string const& name);			// Affiche une matrice.
     // MATRIX FUNCTIONS
-	bool addMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A+B et on met ça dans matrixOut.
-	//bool subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A-B et on met ça dans matrixOut.
-	bool multMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A*B et on met ça dans matrixOut.
-	/*bool inverseMatrix(string const& matrixA, string const& matrixOut);			        // On inverse A et on met ça dans matrixOut.
-	bool puisMatrix(string const& matrixA, unsigned int const& n, string const& matrixOut);	// On fait A^n et on met ça dans matrixOut.
-	bool transpMatrix(string const& MatrixA, string const& matrixOut);			        // On fait la transposée de A et on met ça dans matrixOut.
+	bool addMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A+B et on met ï¿½a dans matrixOut.
+	//bool subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A-B et on met ï¿½a dans matrixOut.
+	bool multMatrix(string const& matrixA, string const& matrixB, string const& matrixOut);	// On fait A*B et on met ï¿½a dans matrixOut.
+	/*bool inverseMatrix(string const& matrixA, string const& matrixOut);			        // On inverse A et on met ï¿½a dans matrixOut.
+	bool puisMatrix(string const& matrixA, unsigned int const& n, string const& matrixOut);	// On fait A^n et on met ï¿½a dans matrixOut.
+	bool transpMatrix(string const& MatrixA, string const& matrixOut);			        // On fait la transposï¿½e de A et on met ï¿½a dans matrixOut.
 	*/
 	// A savoir : string &matrix[X] est le nom d'une matrice.
-	// A savoir : si MatrixOut n'existe pas, on crée un nouveau fichier.
-	// A ajouter les mêmes fonctionnalités pas rapport à des noms de fichier et non pas des noms de matrice. ???
+	// A savoir : si MatrixOut n'existe pas, on crï¿½e un nouveau fichier.
+	// A ajouter les mï¿½mes fonctionnalitï¿½s pas rapport ï¿½ des noms de fichier et non pas des noms de matrice. ???
 
-	void setMatrix(SparseMatrix const& matrixOut);					// Crée une nouvelle matrix si jamais elle n'existe pas.
-	SparseMatrix getMatrix(string const& name);					// Récupère une matrice grâce à son nom.
+	void setMatrix(SparseMatrix const& matrixOut);					// Crï¿½e une nouvelle matrix si jamais elle n'existe pas.
+	SparseMatrix getMatrix(string const& name);					// Rï¿½cupï¿½re une matrice grï¿½ce ï¿½ son nom.
 };
 
 
