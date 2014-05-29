@@ -3,7 +3,7 @@
 
 /*! \file sparseMatrix.h
  *  \brief Header de la classe SparseMatrix
- *  Cette classe est notre entité de base sur laquelle nous
+ *  Cette classe est notre entite de base sur laquelle nous
  *  allons travailler. Elle permet de faire un lien avec un
  *  fichier sparseMatrix.
  *  \author Mathias.Q
@@ -20,6 +20,14 @@
 #include "converter.h"
 
 using namespace std;
+
+
+/*! \class SparseMatrix
+ *  \brief Header de la classe SparseMatrix
+ *  Elle permet de faire un lien avec un
+ *  fichier sparseMatrix.
+ *  Et la convertion d'un fichier texte vers du binaire.
+ */
 class SparseMatrix
 {
 private:
@@ -36,9 +44,9 @@ public:
 	 *	\fn SparseMatrix()
 	 *	\brief Constructeur vide
 	 *
-	 *	Un constructeur qui ne lit pas l'objet à un fichier.
+	 *	Un constructeur qui ne lit pas l'objet ï¿½ un fichier.
 	 *	L'instance ne vaut donc rien, c'est un objet vide,
-	 *	non paramétré.
+	 *	non paramï¿½trï¿½.
 	 *	\sa SparseMatrix(string const& fileName)
 	 */
 	SparseMatrix();
@@ -47,7 +55,7 @@ public:
 	 *	\fn SparseMatrix(string const& fileName)
 	 *	\brief Constructeur
 	 *
-	 * Constructeur faisant référence à un fichier, elle en récupère ses champs.
+	 * Constructeur faisant rï¿½fï¿½rence ï¿½ un fichier, elle en rï¿½cupï¿½re ses champs.
 	 *
 	 *	\sa SparseMatrix()
 	 *	\param fileName le nom du fichier.
@@ -58,7 +66,7 @@ public:
 	 * \fn ~SparseMatrix()
 	 * \brief Destructeur
 	 *
-	 * Un destructeur qui n'a pas grande utilité ici.
+	 * Un destructeur qui n'a pas grande utilitï¿½ ici.
 	 */
 	~SparseMatrix();
 
@@ -66,20 +74,20 @@ public:
 	 *	\fn init(string const& fileName)
 	 *	\brief Initialisateur
 	 *
-	 * Permet d'initialiser la matrice en la liant à un fichier s'il existe déjà.
+	 * Permet d'initialiser la matrice en la liant ï¿½ un fichier s'il existe dï¿½jï¿½.
 	 */
 	void init(string const& name, string const& fileName);
 
 	/*!
 	 *	\fn void newMatrix(unsigned int const& width, unsigned int const& height, string const& fileName, string const& name)
-	 *	\brief Création d'une nouvelle matrice.
+	 *	\brief Crï¿½ation d'une nouvelle matrice.
 	 *
-	 *	Va créer un nouveau fichier et initialiser les valeurs
+	 *	Va crï¿½er un nouveau fichier et initialiser les valeurs
 	 *	width et heigth.
-	 *	Attention : Remplace le fichier si déjà existant !
+	 *	Attention : Remplace le fichier si dï¿½jï¿½ existant !
 	 *	\param width la largeur de la matrice.
 	 *	\param height la hauteur de la matrice.
-	 *	\param fileName le nom du fichier que l'on veut créer.
+	 *	\param fileName le nom du fichier que l'on veut crï¿½er.
 	 */
 	void newMatrix(unsigned int const& width, unsigned int const& height, string const& fileName, string const& name);
 
@@ -88,10 +96,10 @@ public:
 	 *	\fn void random(unsigned int const& min, unsigned int const& max)
 	 *	\brief Remplissage random de la matrice.
 	 *
-	 *	Va remplir la matrice de manière aléatoire avec des valeurs
+	 *	Va remplir la matrice de maniï¿½re alï¿½atoire avec des valeurs
 	 *	comprises entre min et max.
-	 *	Attention : Remplace les valeurs déjà existantes.
-	 *  Attention : Le random ne respecte pas toutes les règles d'une matrice creuse.
+	 *	Attention : Remplace les valeurs dï¿½jï¿½ existantes.
+	 *  Attention : Le random ne respecte pas toutes les rï¿½gles d'une matrice creuse.
 	 *
 	 *	\param min la valeur minimale.
 	 *	\param max la valeur maximale.
@@ -111,12 +119,12 @@ public:
 
 	/*!
 	 *	\fn bool isSet() const
-	 *	\brief Vérifier si la matrice est configurée
+	 *	\brief Vï¿½rifier si la matrice est configurï¿½e
 	 *
-	 * 	Vérifie si la matrice est bien configurée, soit si
-	 *	elle est liée à un fichier. Si tel est le cas,
+	 * 	Vï¿½rifie si la matrice est bien configurï¿½e, soit si
+	 *	elle est liï¿½e ï¿½ un fichier. Si tel est le cas,
 	 *	retourne vrai, sinon retourne faux.
-	 *	\return Retourne vrai si la matrice est bien configurée, sinon faux.
+	 *	\return Retourne vrai si la matrice est bien configurï¿½e, sinon faux.
 	 */
 	bool isSet() const;
 
@@ -171,7 +179,7 @@ public:
 	 *	\fn void setFileName(string const& fileName)
 	 *	\brief Modifie le nom du fichier.
 	 *
-	 *	Modifie le nom du fichier. Il vérifie aussi si
+	 *	Modifie le nom du fichier. Il vï¿½rifie aussi si
 	 *	l'extension est bonne.
 	 *	\param fileName le nouveau nom du fichier.
 	 */
@@ -199,19 +207,19 @@ public:
 // ************************ STATIC UTILITIES *************************** //
 	/*
 	 *	\fn static void isBinType(string const& filename)
-	 *	\brief Vérifier que c'est un type bin.
+	 *	\brief Vï¿½rifier que c'est un type bin.
 	 *
-  	 * Permet de vérifier si le fichier est de type bin ou non. S'il ne l'est pas
-  	 * il est alors considéré comme un type texte.
+  	 * Permet de vï¿½rifier si le fichier est de type bin ou non. S'il ne l'est pas
+  	 * il est alors considï¿½rï¿½ comme un type texte.
   	 *
   	 */
 	static bool isBinType(string const& fileName);
 
 	/*
 	 *	\fn static void replaceExtension(string &fileName);
-	 *	\brief Vérifier que c'est un type bin.
+	 *	\brief Vï¿½rifier que c'est un type bin.
 	 *
-	 * Permet de remplacer l'extension d'un filename donné. Le remplace
+	 * Permet de remplacer l'extension d'un filename donnï¿½. Le remplace
 	 * directement dans l'argument.
   	 *
   	 */
@@ -227,7 +235,7 @@ private:
 	 *	Modifie la largeur de la matrice. Celle
 	 *	-ci n'est utilisable que par la classe
 	 *	car elle ne permet que sa configuration.
-	 *	L'utilisateur n'y a pas accès.
+	 *	L'utilisateur n'y a pas accï¿½s.
 	 *	\param width la nouvelle largeur de la matrice.
 	 */
 	void setWidth(unsigned int const& width);
@@ -239,7 +247,7 @@ private:
 	 *	Modifie la hauteur de la matrice. Celle
 	 *	-ci n'est utilisable que par la classe
 	 *	car elle ne permet que sa configuration.
-	 *	L'utilisateur n'y a pas accès.
+	 *	L'utilisateur n'y a pas accï¿½s.
 	 *	\param height la nouvelle hauteur de la matrice.
 	 */
 	void setHeight(unsigned int const& height);
