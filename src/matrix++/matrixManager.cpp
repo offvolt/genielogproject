@@ -123,7 +123,7 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
                 cC.setI(cA.getI());
                 cC.setJ(cA.getJ());
             }
-            else if(cA.getI() < cB.getI() || (cA.getI() == cB.getI() && cA.getJ() < cB.getJ()))       // Cas où A est traité
+            else if(cA.getI() < cB.getI() || (cA.getI() == cB.getI() && cA.getJ() < cB.getJ()))       // Cas oï¿½ A est traitï¿½
             {
                 readA = true;
                 cC.setValue(cA.getValue());
@@ -131,7 +131,7 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
                 cC.setJ(cA.getJ());
             }
 
-            else if(cB.getI() < cA.getI() || (cB.getI() == cA.getI() && cB.getJ() < cA.getJ()))       // Cas où B est traité
+            else if(cB.getI() < cA.getI() || (cB.getI() == cA.getI() && cB.getJ() < cA.getJ()))       // Cas oï¿½ B est traitï¿½
             {
                 readB = true;
                 cC.setValue(cB.getValue());
@@ -169,7 +169,7 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
     }
     return true;
 
-}	// On fait A+B et on met ça dans matrixOut.
+}	// On fait A+B et on met ï¿½a dans matrixOut.
 
 
 
@@ -188,13 +188,120 @@ bool MatrixManager::addMatrix(string const& matrixA, string const& matrixB, stri
 
 
 
-/*bool MatrixManager::subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut)
+bool MatrixManager::subMatrix(string const& matrixA, string const& matrixB, string const& matrixOut)
 {
+// GET THE WITH AND HEIGHT
+	SparseMatrix mA = getMatrix(matrixA),
+                 mB = getMatrix(matrixB),
+   		 mC;
+        if(matrixOut != "");
+		mC = getMatrix(matrixOut);
 
-return true;
+// CASE ERROR : WIDTH AND HEIGHT
+    if(mA.getWidth() != mB.getWidth() || mA.getHeight() != mB.getHeight())
+    {
+        cout << "ERROR : " << endl;
+        if(mA.getWidth() != mB.getWidth())
+            cout << matrixA << "->width(" << mA.getWidth() << ") != " << matrixB << "->width(" << mB.getWidth() << ")" << endl;
+        if(mA.getHeight() != mB.getHeight())
+            cout << matrixA << "->height(" << mA.getHeight() << ") != " << matrixB << "->height(" << mB.getHeight() << ")" << endl;
+        return false;
+    }
 
-}	// On fait A-B et on met ça dans matrixOut.
-*/
+// READING FILE AND VARIABLES
+    ifstream matrixA_file(mA.getFileName().c_str(), ios::binary);
+    ifstream matrixB_file(mB.getFileName().c_str(), ios::binary);
+    ofstream matrixC_file;
+    if(matrixOut == "")
+        matrixC_file.open(".tmp", ios::binary);
+    else
+        matrixC_file.open(mC.getFileName().c_str(), ios::binary);
+
+    MatrixCase cA,
+               cB,
+               cC;
+
+    unsigned int width = mA.getWidth(),
+                 height = mA.getHeight();
+
+    bool         stopReadA = false,
+                 stopReadB = false,
+                 readA = false,
+                 readB = false;
+
+// NO ERROR
+    if(matrixA_file && matrixB_file && matrixC_file)
+    {
+            cout << "WRITING !" << endl;
+        matrixA_file.seekg(8);
+        matrixB_file.seekg(8);
+
+        MatrixManager::readCase(matrixA_file, cA);
+        MatrixManager::readCase(matrixB_file, cB);
+
+        matrixC_file.write((char*) &width, sizeof(unsigned int));
+        matrixC_file.write((char*) &height, sizeof(unsigned int));
+
+        readA = false;
+        readB = false;
+        while(!stopReadA || !stopReadB)
+        {
+        // OPERATION
+            if(cA.getI() == cB.getI() && cA.getJ() == cB.getJ())                        // On fait l'addition !
+            {
+                readA = true;
+                readB = true;
+                cC.setValue(cA.getValue() - cB.getValue());
+                cC.setI(cA.getI());
+                cC.setJ(cA.getJ());
+            }
+            else if(cA.getI() < cB.getI() || (cA.getI() == cB.getI() && cA.getJ() < cB.getJ()))       // Cas oï¿½ A est traitï¿½
+            {
+                readA = true;
+                cC.setValue(cA.getValue());
+                cC.setI(cA.getI());
+                cC.setJ(cA.getJ());
+            }
+
+            else if(cB.getI() < cA.getI() || (cB.getI() == cA.getI() && cB.getJ() < cA.getJ()))       // Cas oï¿½ B est traitï¿½
+            {
+                readB = true;
+                cC.setValue(cB.getValue());
+                cC.setI(cB.getI());
+                cC.setJ(cB.getJ());
+            }
+
+        // WRITING VALUE
+            MatrixManager::writeCase(matrixC_file, cC);
+
+        // READ MAT A
+            if(!(readA && MatrixManager::readCase(matrixA_file, cA)))
+                stopReadA = true;
+
+        // READ MAT B
+            if(!(readB && MatrixManager::readCase(matrixB_file, cB)))
+                stopReadB = true;
+        }
+        matrixA_file.close();
+        matrixB_file.close();
+        matrixC_file.close();
+    }
+
+
+// ERROR READING
+    else
+    {
+        if(!matrixA_file)
+            cout << "Un probleme est survenu lors de l'ouverture du fichier : " << matrixA << endl;
+        if(!matrixB_file)
+            cout << "Un probleme est survenu lors de l'ouverture du fichier : " << matrixB << endl;
+        if(!matrixC_file)
+            cout << "Un probleme est survenu lors de l'ouverture du fichier : " << ".tmp"<< endl;
+        return false;
+    }
+    return true;
+}	// On fait A-B et on met ï¿½a dans matrixOut.
+
 
 
 
@@ -295,19 +402,19 @@ bool MatrixManager::multMatrix(string const& matrixA, string const& matrixB, str
     }
     return true;
 
-}// On fait A*B et on met ça dans matrixOut.
+}// On fait A*B et on met ï¿½a dans matrixOut.
 bool inverseMatrix(string const& matrixA, string const& matrixOut)
 {
     return true;
-}		        // On inverse A et on met ça dans matrixOut.
+}		        // On inverse A et on met ï¿½a dans matrixOut.
 bool puisMatrix(string const& matrixA, unsigned int const& n, string const& matrixOut)
 {
     return true;
-}	// On fait A^n et on met ça dans matrixOut.
+}	// On fait A^n et on met ï¿½a dans matrixOut.
 bool transpMatrix(string const& MatrixA, string const& matrixOut)
 {
     return true;
-}		        // On fait la transposée de A et on met ça dans matrixOut.
+}		        // On fait la transposï¿½e de A et on met ï¿½a dans matrixOut.
 
 
 
