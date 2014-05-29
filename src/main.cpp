@@ -64,7 +64,7 @@ int main()
 				cin >> input2;
 				tmp = input2 + ".txt";
 				tmp2 = input2 + ".mat";
-				Converter::convert(tmp, tmp2);
+				Converter::convert(tmp2, tmp);
 			break;
 		}
 	}while(input != 0);

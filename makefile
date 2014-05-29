@@ -7,7 +7,7 @@ OBJECT=objects/
 REPLIB=matrix++/
 
 prog: $(SRC)main.cpp $(LIB)libmatrix++.a 
-	g++ -o $(BIN)prog $(SRC)main.cpp -lmatrix++ -L $(LIB) -I $(HEADERS)$(REPLIB)
+	g++ -o $(BIN)prog $(SRC)main.cpp -lmatrix++ -L $(LIB) -I $(HEADERS)$(REPLIB) -pg
 	
 interpreter: $(SRC)mainInterpreter.cpp $(LIB)libmatrix++.a
 	g++ -o $(BIN)interpreter $(SRC)mainInterpreter.cpp -L$(LIB) -lmatrix++ -I $(HEADERS)$(REPLIB)
