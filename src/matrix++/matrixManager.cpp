@@ -394,7 +394,9 @@ bool MatrixManager::getNextLine(ifstream &file, vector<MatrixCase> & line)
     }
     if(cI != cA.getI())
     {
-        file.seekg(file.tellg() - 12);
+	int tellG = file.tellg();
+	int constInt = 12;
+        file.seekg(tellG - constInt);
     }
     return true;
 }
