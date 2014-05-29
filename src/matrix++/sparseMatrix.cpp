@@ -51,7 +51,7 @@ void SparseMatrix::init(string const& name, string const& fileName)
 	    	setWidth(0);
 	    	setHeight(0);
 	    	setFileName("");
-   	 		cout << "ERREUR: Pendant la lecture du fichier. Vérifiez bien que le fichier ne soit pas corrompu." << endl;
+   	 		cout << "ERREUR: Pendant la lecture du fichier. Verifiez bien que le fichier ne soit pas corrompu." << endl;
 	    	return;
 	    }
 	    else
